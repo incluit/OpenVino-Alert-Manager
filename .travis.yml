@@ -8,6 +8,7 @@ services:
 jobs:
   include:
     - stage: Docker
+      if: branch = master
       script:
            - sudo apt-get update
            - docker build -t docker-zmq-pub .
@@ -22,5 +23,7 @@ jobs:
            - docker system prune -a -f
 
     - stage: Validation
+      if: branch = master
       script:
+           - docker pull openvinoincluit/alertmanager:latest
            - echo 'The Pipeline was validated!!!!'
