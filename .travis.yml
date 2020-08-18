@@ -1,6 +1,6 @@
 os: linux
 dist: bionic
-language: cpp
+language: python
 
 services:
   - docker
@@ -13,7 +13,7 @@ jobs:
     - stage: Docker
       script:
            - docker build -t docker-zmq-pub .
-           - docker run --name docker-pub-server -p 5000:5000 -p 4444:4444 -t docker-zmq-pub
+           - docker run -d --name docker-pub-server -p 5000:5000 -p 4444:4444 -t docker-zmq-pub
            - docker ps
            - docker images
            - docker system prune -a -f
