@@ -7,14 +7,15 @@ services:
 
 jobs:
   include:
-    - stage: Install
-      script: sudo apt-get update
-
     - stage: Docker
       script:
+           - sudo apt-get update
            - docker build -t docker-zmq-pub .
            - docker run -d --name docker-pub-server -p 5000:5000 -p 4444:4444 -t docker-zmq-pub
            - docker ps -a
+           - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+           - docker tag docker-zmq-pub  openvinoincluit/alertmanager:latest
+           - docker push openvinoincluit/alertmanager:latest
            - docker stop docker-pub-server
            - docker rm docker-pub-server
            - docker images
