@@ -1,1 +1,0 @@
-# OpenVino-Alert-Manager

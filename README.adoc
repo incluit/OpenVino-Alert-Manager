@@ -1,0 +1,141 @@
+# OpenVino Alert - Manager
+:idprefix:
+:idseparator: -
+:sectanchors:
+:sectlinks:
+:sectnumlevels: 6
+:sectnums:
+:toc: macro
+:toclevels: 6
+:toc-title: Table of Contents
+
+https://travis-ci.org/incluit/OpenVino-Blindspot-Assistance[image:https://travis-ci.org/incluit/OpenVino-Alert-Manager.svg?branch=master[Build
+Status]]
+https://sonarcloud.io/dashboard?id=incluit_OpenVino-Alert-Manager[image:https://sonarcloud.io/api/project_badges/measure?project=incluit_OpenVino-Alert-Manager&metric=alert_status[Sonarcloud
+Status]]
+
+
+toc::[]
+
+== Introduction
+
+This project consists on publish a containerized microservice that can receive messages and put them into a ZEROMQ queue.
+
+== Bussines Logic
+
+This Microservice will receive the alarms that are being generate by Blindspot and it will put the alarm in the queue to be push throw another microservice directly to the cloud.
+
+== Prerequisites
+
+This Microservice Runs on any Operative System, for any test we recommend Ubuntu in his latest version.
+
+=== Hardware
+
+The Microservice will run in any Device that can support an OS.
+
+=== Software
+
+The Microservice is written in Python so we need to any OS that support this language.
+
+=== Checks
+
+At this point you only need to ensure that you have an OS running with Python and Docker inside.
+
+== Building
+
+=== Basic Build
+
+**1.** Clone the repository at desired location:
+
+[source,bash]
+----
+git clone git@github.com:incluit/OpenVino-Alert-Manager.git
+----
+
+**2.** Change to Main Folder of this Project:
+
+[source,bash]
+----
+cd OpenVino-Alert-Manager
+----
+
+**3.** Runs the following scripts:
+
+[source,bash]
+----
+# Start the server process and put it in the background
+python /app/src/server/zmqserver.py &
+
+# Start the client process
+python /app/src/client/zmqclient.py
+----
+
+=== Build with Docker
+
+==== Prerequisites
+
+* Docker. To install on Ubuntu, run:
+
+[source,bash]
+----
+sudo snap install docker
+
+sudo groupadd docker
+
+sudo usermod -aG docker $USER
+----
+
+==== Installation
+
+**1.** Clone the repository at desired location:
+
+[source,bash]
+----
+git clone git@github.com:incluit/OpenVino-Alert-Manager.git
+----
+
+**2.** Change to the top git repository:
+
+[source,bash]
+----
+cd OpenVino-Alert-Manager
+----
+
+**3.** Build the docker:
+[source,bash]
+----
+make docker-build
+----
+
+=== Build in DockerHub
+The master brach of this repository is built in Docker Hub:
+
+https://hub.docker.com/r/openvinoincluit/alertmanager
+
+You can pull the Alert-Manager Docker image using:
+
+----
+docker pull openvinoincluit/alertmanager
+----
+
+== Usage
+
+=== Run With Docker
+
+----
+docker run -d --name docker-pub-server -p 5000:5000 -p 4444:4444 -t docker-zmq-pub
+----
+
+== Docker Options
+
+* Stop the docker container
+[source,bash]
+----
+make docker-stop
+----
+
+* Remove the docker container
+[source,bash]
+----
+make docker-remove
+----
