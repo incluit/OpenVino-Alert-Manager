@@ -6,16 +6,7 @@ RUN apt-get install -y --no-install-recommends \
         build-essential \
         curl \
         zip unzip \
-        git \
-        gcc \
-        make \
-        cmake \
-        cmake-gui\
-        cmake-curses-gui \
-        libssl-dev \
         sudo
-RUN curl -s "https://get.sdkman.io" | bash
-RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh && sdk install java"
 
 RUN pip3 install pyzmq
 
@@ -23,7 +14,6 @@ RUN pip3 install Flask
 
 ADD . /app
 WORKDIR /app
-
 
 # Flask Port
 EXPOSE 5000
