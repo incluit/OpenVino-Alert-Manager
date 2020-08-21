@@ -2,10 +2,6 @@ FROM python:3.8-slim
 
 RUN apt-get update && apt-get -y upgrade && apt-get autoremove
 
-RUN apt-get install -y software-properties-common
-
-RUN add-apt-repository ppa:openjdk-r/ppa
-
 RUN apt-get install -y --no-install-recommends \
         build-essential \
         curl \
@@ -18,6 +14,8 @@ RUN apt-get install -y --no-install-recommends \
         cmake-curses-gui \
         libssl-dev \
         sudo
+RUN curl -s "https://get.sdkman.io" | bash
+RUN /bin/bash -c "source /root/.sdkman/bin/sdkman-init.sh && sdk install java"
 
 RUN pip3 install pyzmq
 
