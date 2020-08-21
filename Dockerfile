@@ -1,7 +1,17 @@
 FROM python:3.8-slim
 
-RUN apt-get update
-RUN apt-get install -y curl
+RUN apt-get update && apt-get -y upgrade && apt-get autoremove
+
+RUN apt-get install -y --no-install-recommends \
+        build-essential \
+        git \
+        gcc \
+        make \
+        cmake \
+        cmake-gui\
+        cmake-curses-gui \
+        libssl-dev \
+        sudo
 
 RUN pip3 install pyzmq
 
