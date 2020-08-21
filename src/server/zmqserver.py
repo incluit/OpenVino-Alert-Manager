@@ -11,11 +11,10 @@ url = 'tcp://{}:{}'.format(HOST, PORT)
 
 
 def publish_message(message):
-
     try:
         _publisher.connect(url)
         time.sleep(1)
-        print("sending message : {0}".format(message, _publisher))
+        print("sending message : {0}".format(message))
         _publisher.send(message.encode('ascii'))
 
     except Exception as e:
@@ -23,21 +22,22 @@ def publish_message(message):
 
     finally:
         print("unbinding")
-        #_publisher.unbind(url)
+        # _publisher.unbind(url)
 
 
 from flask import Flask
 from flask import request
+
 app = Flask(__name__)
 
 
 @app.route("/piq/", methods=['GET'])
-def putInQueue():
-
-    _strn = request.args.get('param')
+def put_in_queue():
+    _strn = request.args.get("param")
     response = 'This ALARM is on the queue now!!! => ' + _strn
     publish_message(response)
     return response
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False)
