@@ -2,6 +2,10 @@ FROM python:3.8-slim
 
 RUN apt-get update && apt-get -y upgrade && apt-get autoremove
 
+RUN apt-get install -y software-properties-common
+
+RUN add-apt-repository ppa:openjdk-r/ppa
+
 RUN apt-get install -y --no-install-recommends \
         build-essential \
         curl \
