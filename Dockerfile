@@ -4,6 +4,8 @@ RUN apt-get update && apt-get -y upgrade && apt-get autoremove
 
 RUN apt-get install -y --no-install-recommends \
         build-essential \
+        curl \
+        zip unzip \
         git \
         gcc \
         make \
