@@ -22,11 +22,12 @@ def publish_message(message):
 
     finally:
         print("unbinding")
-        # _publisher.unbind(url)
+       #_publisher.unbind(url)
 
 
 from flask import Flask
 from flask import request
+from flask import escape
 
 app = Flask(__name__)
 
@@ -36,7 +37,7 @@ def put_in_queue():
     _strn = request.args.get("param")
     response = 'This ALARM is on the queue now!!! => ' + _strn
     publish_message(response)
-    return response
+    return escape(response)
 
 
 if __name__ == '__main__':
