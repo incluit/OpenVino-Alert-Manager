@@ -123,7 +123,13 @@ docker pull openvinoincluit/alertmanager
 === Run With Docker
 
 ----
-docker run -d --name docker-pub-server -p 5000:5000 -p 4444:4444 -t docker-zmq-pub
+docker run -d --name docker-pub-server --network host -t docker-zmq-pub
+----
+
+=== Put Messages in the QUEUE
+
+----
+http://localhost:5000/piq/?param="Message to put in the QUEUE"
 ----
 
 == Docker Options

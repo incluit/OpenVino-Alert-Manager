@@ -19,7 +19,7 @@ WORKDIR /app
 EXPOSE 5000
 
 # Zmq Sub Server
-EXPOSE 3333
+EXPOSE 4444
 
 RUN ["chmod", "+x", "scripts/process.sh"]
 
