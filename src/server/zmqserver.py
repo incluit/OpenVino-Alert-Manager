@@ -3,7 +3,7 @@ import time
 import zmq
 
 HOST = '127.0.0.1'
-PORT = '4444'
+PORT = '3333'
 
 _context = zmq.Context()
 _publisher = _context.socket(zmq.PUB)
@@ -12,7 +12,7 @@ url = 'tcp://{}:{}'.format(HOST, PORT)
 
 def publish_message(message):
     try:
-        _publisher.bind(url)
+        _publisher.connect(url)
         time.sleep(1)
         print("sending message : {0}".format(message))
         _publisher.send(message.encode('ascii'))
@@ -21,8 +21,7 @@ def publish_message(message):
         print("error {0}".format(e))
 
     finally:
-        print("unbinding")
-        _publisher.unbind(url)
+        print("disconnected")
 
 
 from flask import Flask
