@@ -4,7 +4,7 @@ docker-build:
 
 docker-run:
 	docker run -d --name docker-pub-server --network host -t docker-zmq-pub
-	docker run -d --network host --restart unless-stopped --name zmqproxy -v $$PWD:/bin ubuntu:20.04 /bin/zmqproxy
+	docker run -d --network host --restart unless-stopped --name zmqproxy zmq:v1 /src/zmqproxy
 
 docker-stop:
 	docker stop docker-pub-server
