@@ -11,15 +11,15 @@ jobs:
       if: branch = master
       script:
            - sudo apt-get update
-           - docker build -t docker-zmq-pub .
-           - docker run -d --name docker-pub-server --network host -t docker-zmq-pub
+           - make docker-build
+           - make docker-run
            - docker exec docker-pub-server bash -c 'cd /app && curl -s -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.2.0.1873-linux.zip -o sonarscanner.zip && unzip -qq sonarscanner.zip && export PATH=$PATH:sonar-scanner-4.2.0.1873-linux/bin/ && curl -s "https://get.sdkman.io" | bash && source /root/.sdkman/bin/sdkman-init.sh && sdk install java && sonar-scanner -Dsonar.organization=incluit -Dsonar.projectKey=incluit_OpenVino-Alert-Manager -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=52d4a76ab7a5ec115c7b02f04a024f5607767842'
            - docker ps -a
            - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
            - docker tag docker-zmq-pub  openvinoincluit/alertmanager:latest
            - docker push openvinoincluit/alertmanager:latest
-           - docker stop docker-pub-server
-           - docker rm docker-pub-server
+           - make docker-stop
+           - make docker-remove
            - docker images
            - docker system prune -a -f
 
