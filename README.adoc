@@ -9,7 +9,7 @@
 :toclevels: 6
 :toc-title: Table of Contents
 
-https://travis-ci.org/incluit/OpenVino-Blindspot-Assistance[image:https://travis-ci.org/incluit/OpenVino-Alert-Manager.svg?branch=master[Build
+https://travis-ci.org/incluit/OpenVino-Alert-Manager[image:https://travis-ci.org/incluit/OpenVino-Alert-Manager.svg?branch=master[Build
 Status]]
 https://sonarcloud.io/dashboard?id=incluit_OpenVino-Alert-Manager[image:https://sonarcloud.io/api/project_badges/measure?project=incluit_OpenVino-Alert-Manager&metric=alert_status[Sonarcloud
 Status]]
