@@ -34,7 +34,7 @@ app = Flask(__name__)
 @app.route("/piq/", methods=['GET'])
 def put_in_queue():
     _strn = request.args.get("param")
-    response = 'This ALARM is on the queue now!!! => ' + _strn
+    response = _strn
     publish_message(response)
     return escape(response)
 
