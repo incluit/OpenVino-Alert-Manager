@@ -43,33 +43,6 @@ At this point you only need to ensure that you have an OS running with Python an
 
 == Building
 
-=== Basic Build
-
-**1.** Clone the repository at desired location:
-
-[source,bash]
-----
-git clone git@github.com:incluit/OpenVino-Alert-Manager.git
-----
-
-**2.** Change to Main Folder of this Project:
-
-[source,bash]
-----
-cd OpenVino-Alert-Manager
-----
-
-**3.** Runs the following scripts:
-
-[source,bash]
-----
-# Start the server process and put it in the background
-python /app/src/server/zmqserver.py &
-
-# Start the client process
-python /app/src/client/zmqclient.py
-----
-
 === Build with Docker
 
 ==== Prerequisites
@@ -105,40 +78,33 @@ cd OpenVino-Alert-Manager
 [source,bash]
 ----
 make docker-build
-----
-
-=== Build in DockerHub
-The master brach of this repository is built in Docker Hub:
-
-https://hub.docker.com/r/openvinoincluit/alertmanager
-
-You can pull the Alert-Manager Docker image using:
-
-----
-docker pull openvinoincluit/alertmanager
+make docker-run
 ----
 
 == Usage
 
-=== Run With Docker
-
-----
-docker run -d --name docker-pub-server --network host -t docker-zmq-pub
-----
-
 === Put Messages in the QUEUE
 
+**1.** For sending simulated events to the Alert Manager, open a browser and paste the following url:
 ----
-http://localhost:5000/piq/?param="Message to put in the QUEUE"
+http://localhost:5000/piq/?param=[Message to put in the QUEUE]
 ----
 
-== Docker Options
+Also, you can send the event message through console terminal as follows:
 
-* View logs file inside Container (Only Linux System)
+----
+curl http://localhost:5000/piq/?param=MessageToPutInTheQUEUE
+----
+
+
+**2.** For verifying all sent messages check the log file inside Container (Only Linux System) by executing the following command:
+
 [source,bash]
 ----
 docker exec -it docker-pub-server cat /app/logs/subscriber.log
 ----
+
+== Docker Options
 
 * Stop the docker container
 [source,bash]
